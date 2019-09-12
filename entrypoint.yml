@@ -1,4 +1,5 @@
 - hosts: tomcat
+  become: true
   tasks:
     - include: main.yml
     - include: copyfile.yml
