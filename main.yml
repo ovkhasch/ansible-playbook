@@ -1,0 +1,23 @@
+---
+# tasks file for installing tomcat
+
+- hosts: tomcat
+  become: true
+
+  tasks:
+
+    - name: Install Java
+      yum: name=java-1.8.0 state=present
+
+    - name: Download and extract archive
+      unarchive:
+        src: http://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.24/bin/apache-tomcat-9.0.24.tar.gz
+        dest: /usr/local
+        remote_src: yes
+
+    - name: Rename tomcat file
+      command: mv /usr/local/apache-tomcat-9.0.24 /usr/local/tomcat9
+
+    - name: Start Tomcat
+      command: nohup sh /usr/local/tomcat9/bin/startup.sh &
+      register: output
