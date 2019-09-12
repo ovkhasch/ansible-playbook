@@ -1,0 +1,11 @@
+---
+- hosts: tomcat
+  tasks:
+  - name: Copy war file to Tomcat
+    shell : |
+            wget -O /tmp/index.html  http://13.235.45.115:8081/artifactory/libs-snapshot-local/com/example/maven-project/webapp/1.0-SNAPSHOT/
+            var=$(cat /tmp/index.html | grep -i .war\" | tail -1 | cut -d '"' -f2)
+            wget -O /tmp/webapp.war http://13.235.45.115:8081/artifactory/libs-snapshot-local/com/example/maven-project/webapp/1.0-SNAPSHOT/$var
+            sudo cp /tmp/webapp.war /usr/local/tomcat9/webapps/webapp.war
+            rm -rf /tmp/index.html
+            rm -rf /tmp/webapp.war
