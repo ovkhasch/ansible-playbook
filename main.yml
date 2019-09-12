@@ -13,10 +13,13 @@
       unarchive:
         src: http://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.24/bin/apache-tomcat-9.0.24.tar.gz
         dest: /usr/local
+        creates: /usr/local/apache-tomcat-9.0.24
         remote_src: yes
+          
 
     - name: Rename tomcat file
       command: mv /usr/local/apache-tomcat-9.0.24 /usr/local/tomcat9
+      creates: /usr/local/tomcat9
 
     - name: Start Tomcat
       command: nohup sh /usr/local/tomcat9/bin/startup.sh &
