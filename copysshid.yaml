@@ -1,0 +1,13 @@
+---
+# tasks file to copy ssh-key-id
+
+- hosts: localhost
+#  become: true
+
+
+  tasks:
+    - name: Update public key
+      shell: |
+        ssh-keyscan -H {{ item }} > /home/ansadmin/.ssh/known_hosts
+        sshpass -p admin ssh-copy-id admin@{{ item }} -f
+      with_items: "{{groups['tomcat']}}"
