@@ -8,6 +8,9 @@
 
     - name: Install Java
       yum: name=java-1.8.0 state=present
+      
+    - name: Install wget
+      yum: name=wget state=present      
 
     - name: Download and extract archive
       unarchive:
