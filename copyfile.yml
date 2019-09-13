@@ -1,5 +1,5 @@
 ---
-- hosts: tomcat
+- hosts: all
   tasks:
   - name: Copy war file to Tomcat
     shell : |
